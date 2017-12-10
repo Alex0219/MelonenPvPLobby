@@ -1,0 +1,74 @@
+package de.fileinputstream.lobby.commands;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class CommandWarp implements CommandExecutor {
+
+    private static ArrayList<String> warps = new ArrayList<>();
+    private static File path = new File("plugins//MelonLobbySystem//Warps");
+    private static File[] files = path.listFiles();
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+        if (sender instanceof ConsoleCommandSender) {
+
+        } else {
+            Player player = (Player) sender;
+            if (args.length == 0) {
+
+
+                List<String> results = new ArrayList<String>();
+
+
+                File[] files = new File("plugins//MelonLobbySystem//Warps").listFiles();
+//If this pathname does not denote a directory, then listFiles() returns null.
+
+                for (File file : files) {
+                    if (file.isFile()) {
+                        results.add(file.getName());
+                    }
+                }
+
+
+                String separator = "§7,";  // separator here is your ","
+                player.sendMessage("§cWarp §7● Es gibt Momentan folgende Warppunkte: : §6" + Stream.of(results.toString()).collect(Collectors.joining(", ")).replace("[", "").replace("]", ""));
+
+            } else if (args.length == 1) {
+                File path = new File("plugins//MelonLobbySystem//Warps//" + args[0]);
+                if (path.exists()) {
+                    FileConfiguration cfg = YamlConfiguration.loadConfiguration(path);
+
+                    double x = cfg.getDouble("X");
+                    double y = cfg.getDouble("Y");
+                    double z = cfg.getDouble("Z");
+                    float yaw = (float) cfg.getDouble("Yaw");
+                    float pitch = (float) cfg.getDouble("Pitch");
+                    World world = Bukkit.getWorld(cfg.getString("World"));
+
+                    Location spawnLocation = new Location(world, x, y, z, yaw, pitch);
+                    player.teleport(spawnLocation);
+
+
+                } else {
+                    player.sendMessage("§cWarp §7● §4Dieser Warp existiert nicht!");
+                }
+            }
+        }
+        return false;
+    }
+}

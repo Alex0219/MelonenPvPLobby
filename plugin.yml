@@ -1,0 +1,8 @@
+name: Bitch
+version: 1.0
+main: de.fileinputstream.testplugin.Main
+author: FileInputStream
+
+commands:
+
+    bitch:

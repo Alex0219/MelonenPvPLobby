@@ -1,0 +1,64 @@
+name: MelonenPvPLobby by FileInputStream
+version: 1.0
+main: de.fileinputstream.lobby.Main
+author: FileInputStream
+
+commands:
+
+    setwarp:
+
+    warp:
+
+    reloadplugins:
+
+    setspawn:
+
+    spawn:
+
+    ts:
+
+    teamspeak:
+
+    rank:
+
+    build:
+
+    delwarp:
+
+    lobby:
+
+    hub:
+
+    ban:
+
+    unban:
+
+    history:
+
+    check:
+
+    mute:
+
+    tempban:
+
+    unmute:
+
+    tempmute:
+
+    checkbanid:
+
+    l:
+
+    cc:
+
+    skull:
+
+    tp:
+
+    schafmodus:
+
+    fly:
+    gamemode:
+      aliases: [gm]
+    vanish:
+      aliases: [v]
